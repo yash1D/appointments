@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="saveToLocalStorage(event)">
+        <hr>
+        <div class="formBox">
+            <label>Name</label>
+            <input type="text" id="username" name="username" required/>
+        </div>
+        <div class="formbox">
+            <label>EmailId</label>
+            <input type="email" id="email" name="emailId" required/>
+        </div>
+        <hr>
+        <div class="formbox">
+            <button id="btn" >Submit</button>
+        </div>
+        <div id="msg">
+            <pre></pre>
+        </div>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <script>
+        let user = [];
+        const adduser = function(usr){
+            usr.preventDefault();
+            let User = {
+                username : document.getElementById('username').value,
+                email : document.getElementById('email').value
+            }
+
+            
+            
+            
+            user.push(User);
+            document.forms[0].reset();
+            console.log('added',{user});
+            let pre = document.querySelector('#msg pre')
+
+            // axios.post('https://crudcrud.com/api/7ab18af9923840b0bf8554cd788ce2d5')
+            // .then((response)=>{ 
+            //   usr(response.data)
+            //   })
+            // .catch((err)=>console.log(err))
+
+              textContent = '\n' + JSON.stringify(user , '\t' , 2);
+
+
+            localStorage.setItem('myuserList' ,JSON.stringify(user))
+        }
+        document.addEventListener('DOMContentLoaded',()=>{
+            document.getElementById('btn').addEventListener('click',adduser)
+        })
+    </script>
+</body>
+</html>
